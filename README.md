@@ -1,5 +1,5 @@
-#D3 js Barchart
+#D3 js Force layout with images 
 
-Using the new features and syntax of the 4th version of D3 js
+Graph of State Contiguity
 
-See the <a href="http://codepen.io/pbweb/full/pEaxjB/" target="_blank">demo</a>.
+See the <a href="http://codepen.io/pbweb/full/xEzvoQ/" target="_blank">demo</a>.
