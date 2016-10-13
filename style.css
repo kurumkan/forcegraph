@@ -1,0 +1,51 @@
+body{
+    background: #2b3e50;
+    font-family: 'Lato', sans-serif;
+    color:#ebebeb;
+    font-size: 12px;
+    text-align: center;
+}
+#heading{    
+    font-size: 36px;
+}
+#container{
+    width: 960px;
+    margin:0 auto;
+}
+svg text{
+    pointer-events: none;
+}
+.hidden{
+    display: none;
+}
+#tooltip{
+    font-size: 16px;
+    position: absolute;
+    width: 150px;
+    height: auto;
+    padding: 10px;
+    background:#4e5d6c;    
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}            
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #ebebeb;     
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+    fill:#ebebeb;
+}
+a{
+    color:#5bc0de;
+}
