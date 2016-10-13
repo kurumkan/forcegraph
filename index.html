@@ -5,17 +5,21 @@
     <title>D3: Force layout</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>    
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="flags/flags.css">
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <div id="container">
       <h1>Graph of State Contiguity</h1>
+      <div id="tooltip" class="hidden shadowed">                
+          <div id="value"></div>
+      </div>
     </div>
     <script type="text/javascript">    
-      //Width and height
+      //Width and height of the svg element
       var width = 900;
       var height = 600;
-
+      //loading data
       d3.json("https://raw.githubusercontent.com/DealPete/forceDirected/master/countries.json", 
         function(json) {
           var dataset = json;                  
@@ -29,12 +33,10 @@
                  .nodes(dataset.nodes)
                  .links(dataset.links)
                  .size([width, height])
-                 .linkDistance([50])
+                 .linkDistance([40])
                  .charge([-100])
-                 .start();
+                 .start();       
         
-        var colors = d3.scale.category10();
-
         //Create SVG element
         var svg = d3.select("#container")
               .append("svg")
@@ -48,40 +50,49 @@
             .enter()
             .append("line")
             .style("stroke", "#389eb8")
-            .style("stroke-width", 1);
-        
-        //Create nodes as circles
-        var nodes = svg.selectAll("circle")
+            .style("stroke-width", 1);        
+         
+        //Create nodes as images
+        var nodes = d3.select("#container").selectAll("img")
             .data(dataset.nodes)
             .enter()
-            .append("circle")
-            .attr("r", 10)
-            .style("fill", function(d, i) {
-              return colors(i);
-            })
+            .append("img")
+            .attr("src", "blank.gif")
+            .attr("alt", "")
+            .attr("class", function(d){return "absolute flag flag-"+d.code;})            
+            .on("mouseover", function(d){
+              d3.select("#value")
+              .text(d["country"]);          
+
+              var xPosition = (d.x+212)+"px";
+              var yPosition = (d.y+68)+"px";;                        
+                        
+              //Show the tooltip
+              d3.select("#tooltip").classed("hidden", false)
+                    .style("left", xPosition)
+                    .style("top", yPosition);
+            }) 
+            .on("mouseout", function(d){                                                  
+                //hide the tooltip    
+                d3.select("#tooltip").classed("hidden", true);    
+            })            
             .call(force.drag);
-        
+
         //Every time the simulation "ticks", this will be called
         force.on("tick", function() {
 
           edges.attr("x1", function(d) { return d.source.x; })
              .attr("y1", function(d) { return d.source.y; })
              .attr("x2", function(d) { return d.target.x; })
-             .attr("y2", function(d) { return d.target.y; });
-        
-          nodes.attr("cx", function(d) { return d.x; })
-             .attr("cy", function(d) { return d.y; });
-    
+             .attr("y2", function(d) { return d.target.y; });        
+          
+            nodes
+            .style("top", function(d){return (d.y+95)+"px";})
+            .style("left", function(d){return (d.x+180)+"px";});
         });
 
-console.log(dataset)
-
-
-        
+               
       }
-
-        
-      console.log("ok")
     </script>
   </body>
 </html>

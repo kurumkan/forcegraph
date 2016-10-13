@@ -1,6 +1,6 @@
 body{
 	padding: 20px 0;
-	background-color: #f1f1f1;
+	background-color: #eaf1f1;
     font-family: 'Lato', sans-serif;
     color:#555;
     text-align: center;
@@ -13,8 +13,30 @@ svg{
 	border: 1px solid lightgray;
 	background-color: #fff;
 }
+
 .shadowed{
 	-webkit-box-shadow: 0 8px 6px -6px lightgray;
 	   -moz-box-shadow: 0 8px 6px -6px lightgray;
 	        box-shadow: 0 8px 6px -6px lightgray;
+}
+
+.absolute{
+	position: absolute;
+}
+
+.hidden{
+    display: none;
+}
+#tooltip{
+	font-size: 16px;
+    position: absolute;
+    min-width: 40px;    
+    padding: 5px;
+    background: #eaf1f1;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;    
+    border-radius: 2px;    
+    pointer-events: none;
+    border: 1px solid lightgray;
+    z-index: 1000;    
 }
