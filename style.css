@@ -7,11 +7,18 @@ body{
 }
 #container{
 	margin:0 auto;
-	width: 900px;
+	width: 900px;    
+}
+#forcemap{
+    position: relative;    
 }
 svg{
 	border: 1px solid lightgray;
-	background-color: #fff;
+	background-color: #fff;    
+}
+
+.absolute{
+    position: absolute;
 }
 
 .shadowed{
@@ -19,11 +26,6 @@ svg{
 	   -moz-box-shadow: 0 8px 6px -6px lightgray;
 	        box-shadow: 0 8px 6px -6px lightgray;
 }
-
-.absolute{
-	position: absolute;
-}
-
 .hidden{
     display: none;
 }

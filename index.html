@@ -10,9 +10,12 @@
   </head>
   <body>
     <div id="container">
-      <h1>Graph of State Contiguity</h1>
-      <div id="tooltip" class="hidden shadowed">                
+      <h1>Graph of State Contiguity</h1>      
+      <div id="forcemap">
+        <!-- our svg will be in here -->
+        <div id="tooltip" class="hidden shadowed">                
           <div id="value"></div>
+        </div>
       </div>
     </div>
     <script type="text/javascript">    
@@ -38,7 +41,7 @@
                  .start();       
         
         //Create SVG element
-        var svg = d3.select("#container")
+        var svg = d3.select("#forcemap")
               .append("svg")
               .attr("width", width)
               .attr("height", height)
@@ -53,7 +56,7 @@
             .style("stroke-width", 1);        
          
         //Create nodes as images
-        var nodes = d3.select("#container").selectAll("img")
+        var nodes = d3.select("#forcemap").selectAll("img")
             .data(dataset.nodes)
             .enter()
             .append("img")
@@ -62,22 +65,19 @@
             .attr("class", function(d){return "absolute flag flag-"+d.code;})            
             .on("mouseover", function(d){
               d3.select("#value")
-              .text(d["country"]);          
+              .text(d["country"]);                 
 
-              var xPosition = (d.x+212)+"px";
-              var yPosition = (d.y+68)+"px";;                        
-                        
               //Show the tooltip
               d3.select("#tooltip").classed("hidden", false)
-                    .style("left", xPosition)
-                    .style("top", yPosition);
+                    .style("left", (d.x+17)+"px")
+                    .style("top", (d.y-42)+"px");
             }) 
             .on("mouseout", function(d){                                                  
                 //hide the tooltip    
                 d3.select("#tooltip").classed("hidden", true);    
             })            
             .call(force.drag);
-
+        
         //Every time the simulation "ticks", this will be called
         force.on("tick", function() {
 
@@ -86,12 +86,10 @@
              .attr("x2", function(d) { return d.target.x; })
              .attr("y2", function(d) { return d.target.y; });        
           
-            nodes
-            .style("top", function(d){return (d.y+95)+"px";})
-            .style("left", function(d){return (d.x+180)+"px";});
-        });
-
-               
+            nodes            
+            .style("top", function(d){return (d.y-15)+"px";})
+            .style("left", function(d){return (d.x-15)+"px";});            
+        });               
       }
     </script>
   </body>
